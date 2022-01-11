@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Tennis Family</string>
+    <string name="score_00">00</string>
+    <string name="button_empty1">Забил игрок 1</string>
+    <string name="button_empty2">Забил игрок 2</string>
+    <string name="player1_const">игрок 1</string>
+    <string name="player2_const">игрок 2</string>
+    <string name="tennisfamily">TennisFamily</string>
+    <string name="start_button">Начать партию</string>
+    <string name="settings">Настройки</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="btnChange">Изменить</string>
+    <string name="change_first_name">Изменить имя первого игрока</string>
+    <string name="change_second_name">Изменить имя второго игрока</string>
+</resources>
