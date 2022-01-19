@@ -35,11 +35,17 @@ public class SettingsActivity extends AppCompatActivity {
         editPlayerRight.setText(namePlayer2);
 
         btnChangeLeft.setOnClickListener(v -> {
-            saveFirstPlayer();
+            if (editPlayerLeft.getText().toString().length() > 0)
+                saveFirstPlayer();
+            else
+                Toast.makeText(this, "Введите имя игрока", Toast.LENGTH_SHORT).show();
         });
 
         btnChangeRight.setOnClickListener(v -> {
-            saveSecondPlayer();
+            if (editPlayerRight.getText().toString().length() > 0)
+                saveSecondPlayer();
+            else
+                Toast.makeText(this, "Введите имя игрока", Toast.LENGTH_SHORT).show();
         });
     }
 
