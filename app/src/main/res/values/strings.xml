@@ -27,4 +27,6 @@
     <string name="btnChange">Изменить</string>
     <string name="change_first_name">Изменить имя первого игрока</string>
     <string name="change_second_name">Изменить имя второго игрока</string>
+    <string name="number_count_draw">Количество очков перед сменой подачи</string>
+    <string name="number_count_game">Количество очков для победы в партии</string>
 </resources>

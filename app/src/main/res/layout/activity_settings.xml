@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -36,6 +36,7 @@
                     android:layout_marginHorizontal="50sp"
                     android:ems="10"
                     android:inputType="textPersonName"
+                    android:imeOptions="actionDone"
                     android:minHeight="48dp"
                     android:text="@string/player1_const" />
 
@@ -46,6 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editPlayerLeft"
                     android:text="@string/btnChange" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -68,6 +70,7 @@
                     android:layout_marginHorizontal="50sp"
                     android:ems="10"
                     android:inputType="textPersonName"
+                    android:imeOptions="actionDone"
                     android:minHeight="48dp"
                     android:text="@string/player2_const" />
 
@@ -90,12 +93,64 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txtCountPitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/number_count_draw" />
+
+                <EditText
+                    android:id="@+id/editCountPitch"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="50sp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:minHeight="48dp"
+                    android:imeOptions="actionDone"
+                    android:layout_below="@+id/txtCountPitch"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/btnCountPitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="100sp"
+                    android:layout_below="@+id/editCountPitch"
+                    android:text="@string/btnChange" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txtCountGame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/number_count_game" />
+
+                <EditText
+                    android:id="@+id/editCountGame"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="50sp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:minHeight="48dp"
+                    android:imeOptions="actionDone"
+                    android:layout_below="@+id/txtCountGame"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/btnCountGame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="100sp"
+                    android:layout_below="@+id/editCountGame"
+                    android:text="@string/btnChange" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

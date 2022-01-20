@@ -2,17 +2,13 @@ package ru.nippyfox.tennisfamily;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String SHARED_PREFS = "sharedPrefs";
-    static final String namePlayer1 = "игрок 1";
-    public static final String SHARED_PREFS_2 = "sharedPrefs";
-    static final String namePlayer2 = "игрок 2";
-    static final int finishPitch = 5;
-    static final int finishGame = 21;
 
     Button btnStart;
     Button btnSettings;

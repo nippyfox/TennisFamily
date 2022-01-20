@@ -1,17 +1,11 @@
 package ru.nippyfox.tennisfamily;
 
-import static ru.nippyfox.tennisfamily.MainActivity.SHARED_PREFS;
-import static ru.nippyfox.tennisfamily.MainActivity.SHARED_PREFS_2;
-import static ru.nippyfox.tennisfamily.MainActivity.namePlayer1;
-import static ru.nippyfox.tennisfamily.MainActivity.namePlayer2;
-import static ru.nippyfox.tennisfamily.MainActivity.finishGame;
-import static ru.nippyfox.tennisfamily.MainActivity.finishPitch;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -22,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ControlActivity extends AppCompatActivity {
-    int score1, score2;
+    int score1, score2, finishGame, finishPitch;
     TextView txtScore1, txtScore2;
     Button btnScore1, btnScore2;
     String playerOne, playerTwo;
@@ -82,13 +76,15 @@ public class ControlActivity extends AppCompatActivity {
         btnScore1 = findViewById(R.id.btnPlayerLeft);
         btnScore2 = findViewById(R.id.btnPlayerRight);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        playerOne = sharedPreferences.getString(namePlayer1, "игрок 1");
+        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        playerOne = sharedPreferences.getString("namePlayer1","игрок 1");
         btnScore1.setText(String.format("Забил %s", playerOne));
 
-        SharedPreferences sharedPreferencesSec = getSharedPreferences(SHARED_PREFS_2, MODE_PRIVATE);
-        playerTwo = sharedPreferencesSec.getString(namePlayer2, "игрок 2");
+        playerTwo = sharedPreferences.getString("namePlayer2", "игрок 2");
         btnScore2.setText(String.format("Забил %s", playerTwo));
+
+        finishPitch = sharedPreferences.getInt("finishPitch", 5);
+        finishGame = sharedPreferences.getInt("finishGame", 21);
 
         score1 = 0;
         score2 = 0;
