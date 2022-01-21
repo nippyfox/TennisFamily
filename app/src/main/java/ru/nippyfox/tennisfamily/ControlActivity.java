@@ -40,7 +40,7 @@ public class ControlActivity extends AppCompatActivity {
 
     public void finishPart() {
         String winAlertMsg;
-        if (score1 == 21) {
+        if (score1 == finishGame) {
             winAlertMsg = "Победу одержал " + playerOne + " со счётом " + score1 + ":" + score2;
         } else {
             winAlertMsg = "Победу одержал " + playerTwo + " со счётом " + score1 + ":" + score2;

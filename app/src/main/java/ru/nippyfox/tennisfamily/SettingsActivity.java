@@ -64,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
             int getNewPitch = Integer.parseInt(editCountPitch.getText().toString());
             if (String.valueOf(getNewPitch).length() > 0) {
                 if (getNewPitch > 0) {
-                    if (getNewPitch < finishGame)
+                    if (getNewPitch < finishGame && getNewPitch < 100)
                         changeField(3);
                     else
                         Toast.makeText(this, "Значение не может быть таким", Toast.LENGTH_SHORT).show();
@@ -77,9 +77,10 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         btnCountGame.setOnClickListener(v -> {
-            if (editCountGame.getText().toString().length() > 0) {
-                if (Integer.parseInt(editCountGame.getText().toString()) > 0) {
-                    if (Integer.parseInt(editCountGame.getText().toString()) > finishPitch)
+            int getNewFinish = Integer.parseInt(editCountGame.getText().toString());
+            if (String.valueOf(getNewFinish).length() > 0) {
+                if (getNewFinish > 0) {
+                    if (getNewFinish > finishPitch && getNewFinish < 100)
                         changeField(4);
                     else
                         Toast.makeText(this, "Значение не может быть таким", Toast.LENGTH_SHORT).show();
