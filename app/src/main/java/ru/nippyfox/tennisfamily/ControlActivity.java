@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -20,6 +21,7 @@ public class ControlActivity extends AppCompatActivity {
     TextView txtScore1, txtScore2;
     Button btnScore1, btnScore2;
     String playerOne, playerTwo;
+    Boolean isLeftWin = true;
 
     final int MENU_RESET_FIRST = 1;
     final int MENU_RESET_SECOND = 2;
@@ -85,6 +87,18 @@ public class ControlActivity extends AppCompatActivity {
 
         finishPitch = sharedPreferences.getInt("finishPitch", 5);
         finishGame = sharedPreferences.getInt("finishGame", 21);
+
+        final String[] winNamesDialog = {
+                String.format("Выиграл %s", playerOne),
+                String.format("Выиграл %s", playerTwo)
+        };
+
+        AlertDialog startDlg = new AlertDialog.Builder(ControlActivity.this)
+                .setTitle("Розыгрыш партии")
+                .setItems(winNamesDialog, (dialog, which) -> {
+                    isLeftWin = which == 0;
+                }).create();
+        startDlg.show();
 
         score1 = 0;
         score2 = 0;
