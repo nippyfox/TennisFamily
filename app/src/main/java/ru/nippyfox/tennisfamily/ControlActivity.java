@@ -28,7 +28,7 @@ public class ControlActivity extends AppCompatActivity {
     private long backPressedTime;
 
     @Override
-    public void onBackPressed() { //
+    public void onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             finish();
             System.exit(0);
@@ -52,6 +52,7 @@ public class ControlActivity extends AppCompatActivity {
 
         AlertDialog startDlg = new AlertDialog.Builder(ControlActivity.this)
                 .setTitle("Розыгрыш партии")
+                .setCancelable(false)
                 .setItems(winNamesDialog, (dialog, which) -> {
                     if (which == 0) {
                         txtWinned = txtLeftPitcher; txtLosed = txtRightPitcher;
@@ -62,8 +63,6 @@ public class ControlActivity extends AppCompatActivity {
                     txtLosed.setText(R.string.empty);
                 }).create();
         startDlg.show();
-
-        // TODO: dismiss AlertDialog startDlg to close
     }
 
     public void finishPart() {
