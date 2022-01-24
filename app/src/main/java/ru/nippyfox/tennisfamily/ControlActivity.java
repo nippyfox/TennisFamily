@@ -77,6 +77,7 @@ public class ControlActivity extends AppCompatActivity {
         AlertDialog dlg = new AlertDialog.Builder(ControlActivity.this)
                 .setTitle("Партия завершена")
                 .setMessage(winAlertMsg)
+                .setCancelable(false)
                 .setPositiveButton("Играть дальше", (dialog, which) -> {
                     dialog.dismiss();
                     startNewGame();
