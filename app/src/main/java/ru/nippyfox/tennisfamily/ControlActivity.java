@@ -17,12 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ControlActivity extends AppCompatActivity {
-    AlertDialog startDlg;
     int score1, score2, finishGame, finishPitch;
     TextView txtScore1, txtScore2, txtWinned, txtLosed, txtLeftPitcher, txtRightPitcher;
     Button btnScore1, btnScore2;
     String playerOne, playerTwo;
-    Boolean isLeftWin = true;
 
     final int MENU_RESET_FIRST = 1;
     final int MENU_RESET_SECOND = 2;
@@ -30,7 +28,7 @@ public class ControlActivity extends AppCompatActivity {
     private long backPressedTime;
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() { //
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             finish();
             System.exit(0);
@@ -41,26 +39,56 @@ public class ControlActivity extends AppCompatActivity {
         backPressedTime = System.currentTimeMillis();
     }
 
-    public void finishPart() {
-        String winAlertMsg;
-        if (score1 == finishGame) {
-            winAlertMsg = "Победу одержал " + playerOne + " со счётом " + score1 + ":" + score2;
-        } else {
-            winAlertMsg = "Победу одержал " + playerTwo + " со счётом " + score1 + ":" + score2;
-        }
-
-        // TODO: start new game in optional function
-
-        AlertDialog dlg = new AlertDialog.Builder(ControlActivity.this)
-                .setTitle("Партия завершена")
-                .setMessage(winAlertMsg)
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss()).create();
-        dlg.show();
-
+    private void startNewGame() {
         score1 = 0;
         score2 = 0;
         txtScore1.setText(R.string.score_00);
         txtScore2.setText(R.string.score_00);
+
+        final String[] winNamesDialog = {
+                String.format("Выиграл %s", playerOne),
+                String.format("Выиграл %s", playerTwo)
+        };
+
+        AlertDialog startDlg = new AlertDialog.Builder(ControlActivity.this)
+                .setTitle("Розыгрыш партии")
+                .setItems(winNamesDialog, (dialog, which) -> {
+                    if (which == 0) {
+                        txtWinned = txtLeftPitcher; txtLosed = txtRightPitcher;
+                    } else {
+                        txtWinned = txtRightPitcher; txtLosed = txtLeftPitcher;
+                    }
+                    txtWinned.setText(R.string.arrow_pitcher);
+                    txtLosed.setText(R.string.empty);
+                }).create();
+        startDlg.show();
+
+        // TODO: dismiss AlertDialog startDlg to close
+    }
+
+    public void finishPart() {
+        String winAlertMsg;
+        String anotherGame = "\nСыграть ещё одну партию?";
+        if (score1 == finishGame) {
+            winAlertMsg = "Победу одержал " + playerOne + " со счётом " + score1 + ":" + score2 + anotherGame;
+        } else {
+            winAlertMsg = "Победу одержал " + playerTwo + " со счётом " + score1 + ":" + score2 + anotherGame;
+        }
+
+        AlertDialog dlg = new AlertDialog.Builder(ControlActivity.this)
+                .setTitle("Партия завершена")
+                .setMessage(winAlertMsg)
+                .setPositiveButton("Играть дальше", (dialog, which) -> {
+                    dialog.dismiss();
+                    startNewGame();
+                })
+                .setNegativeButton("В меню", (dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
+                    System.exit(0);
+                })
+                .create();
+        dlg.show();
     }
 
     private String toScore(int score) {
@@ -106,27 +134,7 @@ public class ControlActivity extends AppCompatActivity {
         finishPitch = sharedPreferences.getInt("finishPitch", 5);
         finishGame = sharedPreferences.getInt("finishGame", 21);
 
-        final String[] winNamesDialog = {
-                String.format("Выиграл %s", playerOne),
-                String.format("Выиграл %s", playerTwo)
-        };
-
-        startDlg = new AlertDialog.Builder(ControlActivity.this)
-                .setTitle("Розыгрыш партии")
-                .setItems(winNamesDialog, (dialog, which) -> {
-                    isLeftWin = which == 0;
-                }).create();
-        startDlg.show();
-
-        if (isLeftWin) {
-            txtWinned = txtLeftPitcher; txtLosed = txtRightPitcher;
-        } else {
-            txtWinned = txtRightPitcher; txtLosed = txtLeftPitcher;
-        }
-        checkPitcher();
-
-        score1 = 0;
-        score2 = 0;
+        startNewGame();
 
         btnScore1.setOnClickListener(v -> {
             score1 += 1;
