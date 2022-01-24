@@ -26,17 +26,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="30sp"
+                android:paddingTop="30sp"
                 android:text="@string/score_00"
                 android:textSize="120sp" />
+
+            <TextView
+                android:id="@+id/txtLeftPitcher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtScore1"
+                android:gravity="center"
+                android:text="@string/arrow_pitcher"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnPlayerLeft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtScore1"
+                android:layout_below="@id/txtLeftPitcher"
                 android:layout_marginHorizontal="60sp"
                 android:text="@string/button_empty1" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -48,18 +59,29 @@
                 android:id="@+id/txtScore2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="30sp"
-                android:textSize="120sp"
                 android:gravity="center"
-                android:text="@string/score_00" />
+                android:paddingTop="30sp"
+                android:text="@string/score_00"
+                android:textSize="120sp" />
+
+            <TextView
+                android:id="@+id/txtRightPitcher"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtScore2"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:text="@string/arrow_pitcher" />
 
             <Button
                 android:id="@+id/btnPlayerRight"
-                android:layout_below="@id/txtScore2"
+                android:layout_below="@id/txtRightPitcher"
                 android:layout_width="match_parent"
                 android:layout_marginHorizontal="60sp"
                 android:layout_height="wrap_content"
                 android:text="@string/button_empty2" />
+
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,8 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ControlActivity extends AppCompatActivity {
+    AlertDialog startDlg;
     int score1, score2, finishGame, finishPitch;
-    TextView txtScore1, txtScore2;
+    TextView txtScore1, txtScore2, txtWinned, txtLosed, txtLeftPitcher, txtRightPitcher;
     Button btnScore1, btnScore2;
     String playerOne, playerTwo;
     Boolean isLeftWin = true;
@@ -47,11 +48,15 @@ public class ControlActivity extends AppCompatActivity {
         } else {
             winAlertMsg = "Победу одержал " + playerTwo + " со счётом " + score1 + ":" + score2;
         }
+
+        // TODO: start new game in optional function
+
         AlertDialog dlg = new AlertDialog.Builder(ControlActivity.this)
                 .setTitle("Партия завершена")
                 .setMessage(winAlertMsg)
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss()).create();
         dlg.show();
+
         score1 = 0;
         score2 = 0;
         txtScore1.setText(R.string.score_00);
@@ -67,6 +72,17 @@ public class ControlActivity extends AppCompatActivity {
         return textScore;
     }
 
+    public void checkPitcher() {
+        int test = (score1 + score2) / finishPitch;
+        if (test % 2 == 0) {
+            txtWinned.setText(R.string.arrow_pitcher);
+            txtLosed.setText(R.string.empty);
+        } else {
+            txtWinned.setText(R.string.empty);
+            txtLosed.setText(R.string.arrow_pitcher);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +90,8 @@ public class ControlActivity extends AppCompatActivity {
 
         txtScore1 = findViewById(R.id.txtScore1);
         txtScore2 = findViewById(R.id.txtScore2);
+        txtLeftPitcher = findViewById(R.id.txtLeftPitcher);
+        txtRightPitcher = findViewById(R.id.txtRightPitcher);
 
         btnScore1 = findViewById(R.id.btnPlayerLeft);
         btnScore2 = findViewById(R.id.btnPlayerRight);
@@ -93,12 +111,19 @@ public class ControlActivity extends AppCompatActivity {
                 String.format("Выиграл %s", playerTwo)
         };
 
-        AlertDialog startDlg = new AlertDialog.Builder(ControlActivity.this)
+        startDlg = new AlertDialog.Builder(ControlActivity.this)
                 .setTitle("Розыгрыш партии")
                 .setItems(winNamesDialog, (dialog, which) -> {
                     isLeftWin = which == 0;
                 }).create();
         startDlg.show();
+
+        if (isLeftWin) {
+            txtWinned = txtLeftPitcher; txtLosed = txtRightPitcher;
+        } else {
+            txtWinned = txtRightPitcher; txtLosed = txtLeftPitcher;
+        }
+        checkPitcher();
 
         score1 = 0;
         score2 = 0;
@@ -111,6 +136,10 @@ public class ControlActivity extends AppCompatActivity {
             }
             else if ((score1 + score2) % finishPitch == 0) {
                 Toast.makeText(this, "Переход подачи", Toast.LENGTH_SHORT).show();
+                checkPitcher();
+            }
+            else {
+                checkPitcher();
             }
         });
 
@@ -122,6 +151,10 @@ public class ControlActivity extends AppCompatActivity {
             }
             else if ((score1 + score2) % finishPitch == 0) {
                 Toast.makeText(this, "Переход подачи", Toast.LENGTH_SHORT).show();
+                checkPitcher();
+            }
+            else {
+                checkPitcher();
             }
         });
 
@@ -149,6 +182,7 @@ public class ControlActivity extends AppCompatActivity {
                 if (score1 >= 1) {
                     score1 -= 1;
                     txtScore1.setText(toScore(score1));
+                    checkPitcher();
                 } else {
                     Toast.makeText(this, "Невозможно выполнить действие!", Toast.LENGTH_LONG).show();
                 }
@@ -157,6 +191,7 @@ public class ControlActivity extends AppCompatActivity {
                 if (score2 >= 1) {
                     score2 -= 1;
                     txtScore2.setText(toScore(score2));
+                    checkPitcher();
                 } else {
                     Toast.makeText(this, "Невозможно выполнить действие!", Toast.LENGTH_LONG).show();
                 }
